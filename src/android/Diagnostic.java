@@ -28,11 +28,10 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -621,7 +620,7 @@ public class Diagnostic extends CordovaPlugin{
     }
 
     protected String generateRandom(){
-        Random rn = new Random();
+        SecureRandom rn = new SecureRandom();
         int random = rn.nextInt(1000000) + 1;
         return Integer.toString(random);
     }
