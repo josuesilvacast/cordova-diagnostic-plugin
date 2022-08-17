@@ -107,7 +107,6 @@ public class Diagnostic_NFC extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 
@@ -258,7 +257,6 @@ public class Diagnostic_NFC extends CordovaPlugin{
             final String action = intent.getAction();
             if(instance != null && action.equals(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED)){
 
-                Log.v(TAG, "onReceiveNFCStateChange");
                 final int stateValue = intent.getIntExtra(EXTRA_ADAPTER_STATE, -1);
                 instance.notifyNFCStateChange(stateValue);
             }
