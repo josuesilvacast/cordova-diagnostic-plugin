@@ -52,7 +52,6 @@ import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.util.Log;
 
 import android.content.Context;
 import android.content.Intent;
@@ -228,7 +227,6 @@ public class Diagnostic extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
 
         applicationContext = this.cordova.getActivity().getApplicationContext();
@@ -451,27 +449,23 @@ public class Diagnostic extends CordovaPlugin{
 
     public void logDebug(String msg) {
         if(debugEnabled){
-            Log.d(TAG, msg);
             executeGlobalJavascript("console.log(\""+TAG+"[native]: "+escapeDoubleQuotes(msg)+"\")");
         }
     }
 
     public void logInfo(String msg){
-        Log.i(TAG, msg);
         if(debugEnabled){
             executeGlobalJavascript("console.info(\""+TAG+"[native]: "+escapeDoubleQuotes(msg)+"\")");
         }
     }
 
     public void logWarning(String msg){
-        Log.w(TAG, msg);
         if(debugEnabled){
             executeGlobalJavascript("console.warn(\""+TAG+"[native]: "+escapeDoubleQuotes(msg)+"\")");
         }
     }
 
     public void logError(String msg){
-        Log.e(TAG, msg);
         if(debugEnabled){
             executeGlobalJavascript("console.error(\""+TAG+"[native]: "+escapeDoubleQuotes(msg)+"\")");
         }
@@ -541,7 +535,6 @@ public class Diagnostic extends CordovaPlugin{
                 permission = "BODY_SENSORS";
             }
             String androidPermission = permissionsMap.get(permission);
-            Log.v(TAG, "Get authorisation status for "+androidPermission);
             boolean granted = hasRuntimePermission(androidPermission);
             if(granted){
                 statuses.put(permission, Diagnostic.STATUS_GRANTED);
@@ -568,22 +561,18 @@ public class Diagnostic extends CordovaPlugin{
             String permission = currentPermissionsStatuses.names().getString(i);
             boolean granted = currentPermissionsStatuses.getString(permission) == Diagnostic.STATUS_GRANTED;
             if(granted){
-                Log.d(TAG, "Permission already granted for "+permission);
                 JSONObject requestStatuses = permissionStatuses.get(String.valueOf(requestId));
                 requestStatuses.put(permission, Diagnostic.STATUS_GRANTED);
                 permissionStatuses.put(String.valueOf(requestId), requestStatuses);
             }else{
                 String androidPermission = permissionsMap.get(permission);
-                Log.d(TAG, "Requesting permission for "+androidPermission);
                 permissionsToRequest.put(androidPermission);
             }
         }
         if(permissionsToRequest.length() > 0){
-            Log.v(TAG, "Requesting permissions");
             requestPermissions(this, requestId, jsonArrayToStringArray(permissionsToRequest));
 
         }else{
-            Log.d(TAG, "No permissions to request: returning result");
             sendRuntimeRequestResult(requestId);
         }
     }
@@ -592,7 +581,6 @@ public class Diagnostic extends CordovaPlugin{
         String sRequestId = String.valueOf(requestId);
         CallbackContext context = callbackContexts.get(sRequestId);
         JSONObject statuses = permissionStatuses.get(sRequestId);
-        Log.v(TAG, "Sending runtime request result for id="+sRequestId);
         context.success(statuses);
     }
 
@@ -883,7 +871,6 @@ public class Diagnostic extends CordovaPlugin{
      */
     public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
         String sRequestId = String.valueOf(requestCode);
-        Log.v(TAG, "Received result for permissions request id=" + sRequestId);
         try {
 
             CallbackContext context = getContextById(sRequestId);
@@ -920,7 +907,6 @@ public class Diagnostic extends CordovaPlugin{
                     status = Diagnostic.STATUS_GRANTED;
                 }
                 statuses.put(permission, status);
-                Log.v(TAG, "Authorisation for " + permission + " is " + statuses.get(permission));
                 clearRequest(requestCode);
             }
 

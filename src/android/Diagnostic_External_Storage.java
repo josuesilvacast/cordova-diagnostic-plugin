@@ -26,7 +26,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import androidx.core.os.EnvironmentCompat;
-import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -94,7 +93,6 @@ public class Diagnostic_External_Storage extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 

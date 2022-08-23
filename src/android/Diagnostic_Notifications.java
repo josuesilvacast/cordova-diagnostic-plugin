@@ -28,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -90,7 +89,6 @@ public class Diagnostic_Notifications extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 

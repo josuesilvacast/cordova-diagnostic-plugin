@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -86,7 +85,6 @@ public class Diagnostic_Wifi extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 

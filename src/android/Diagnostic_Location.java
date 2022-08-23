@@ -33,7 +33,6 @@ import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.os.Build;
-import android.util.Log;
 
 import android.content.Context;
 import android.content.Intent;
@@ -102,7 +101,6 @@ public class Diagnostic_Location extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 
@@ -292,7 +290,6 @@ public class Diagnostic_Location extends CordovaPlugin{
 
     private boolean isLocationAuthorized() throws Exception {
         boolean authorized = diagnostic.hasRuntimePermission(diagnostic.permissionsMap.get(gpsLocationPermission)) || diagnostic.hasRuntimePermission(diagnostic.permissionsMap.get(networkLocationPermission));
-        Log.v(TAG, "Location permission is "+(authorized ? "authorized" : "unauthorized"));
         return authorized;
     }
 
@@ -311,7 +308,6 @@ public class Diagnostic_Location extends CordovaPlugin{
         try {
             final String action = intent.getAction();
             if(instance != null && action.equals(LocationManager.PROVIDERS_CHANGED_ACTION)){
-                Log.v(TAG, "onReceiveLocationProviderChange");
                 instance.notifyLocationStateChange();
             }
         } catch (Exception e) {

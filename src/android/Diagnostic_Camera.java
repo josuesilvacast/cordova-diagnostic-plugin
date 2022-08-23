@@ -24,7 +24,6 @@ package cordova.plugins;
 
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -84,7 +83,6 @@ public class Diagnostic_Camera extends CordovaPlugin{
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 

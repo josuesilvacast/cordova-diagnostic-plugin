@@ -32,7 +32,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
@@ -129,7 +128,6 @@ public class Diagnostic_Bluetooth extends CordovaPlugin {
      * @param webView The CordovaWebView Cordova is running in.
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.d(TAG, "initialize()");
         instance = this;
         diagnostic = Diagnostic.getInstance();
 
@@ -370,7 +368,6 @@ public class Diagnostic_Bluetooth extends CordovaPlugin {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if(instance != null && action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
-                Log.v(TAG, "bluetoothStateChangeReceiver");
                 instance.notifyBluetoothStateChange();
             }
         }
